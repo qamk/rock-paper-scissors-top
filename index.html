@@ -1,8 +1,50 @@
 <!DOCTYPE html>
 <html>
+<body>
 <script>
-    
-</script>
+    "use strict";
+    function computerPlays() {
+      let randomNum = Math.floor(Math.random()*3);
+      let strategy = ["Rock", "Paper", "Scissors"];
+      return strategy[randomNum];
+    }
+    function playRound(playerSelection,computerSelection){
+        playerSelection = playerSelection.toLowerCase();
+        computerSelection = computerSelection.toLowerCase();
+        if (playerSelection === computerSelection) {
+            return `Draw with ${computerSelection}!`
+        }
+        else if (playerSelection === "rock" && computerSelection === "scissors") {
+            return `You win! ${playerSelection} beats ${computerSelection}`
+        }
+        else if (playerSelection === "paper" && computerSelection === "rock") {
+            return `You win! ${playerSelection} beats ${computerSelection}`
+        }
+        else if (playerSelection === "scissors" && computerSelection === "paper")  {
+            return `You win! ${playerSelection} beats ${computerSelection}`
+        }
+        else if (!(playerSelection === "rock" || playerSelection=== "paper" || playerSelection==="scissors")) {
+            return "Enter either rock, paper or scissors!!! Quit by pressing cancel... I'm checking..."
 
+        }
+        else {
+            return `You lose! ${computerSelection} beats ${playerSelection}`
+        }
+    }
+    function game() {
+        let playerSelection, computerSelection, result;
+        for (let i =0;i<=5;i++) {
+            playerSelection = prompt("Welcome. Pick either rock, papper or scissors. To quit press cancel") || "";
+            if (playerSelection === "") {
+                console.log("Breaking.......")
+                break;
+            }
+            computerSelection = computerPlays();
+            result = playRound(playerSelection,computerSelection);
+            console.log(`Round ${i}: ${result}`);
+        }
+    }
+</script>
+</body>
 
 </html>
