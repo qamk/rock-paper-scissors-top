@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <link href="style.css" rel="stylesheet">
+</head>
+<body>
+    <p></p>
+    <div class="container">
+        <div data-choice= "rock" class="choice">
+            Rock
+        </div>
+        <div data-choice="paper" class="choice">
+            Paper
+        </div>
+        <div data-choice="scissors" class="choice">
+            Scissors
+        </div>
+    </div>
+<script>
+    "use strict";
+
+    function computerPlays() {
+      let randomNum = Math.floor(Math.random()*3);
+      let strategy = ["Rock", "Paper", "Scissors"];
+      return strategy[randomNum];
+    }
+
+    function playRound(playerSelection,computerSelection){
+        computerSelection = computerSelection.toLowerCase();
+        if (playerSelection === computerSelection) {
+            return `Draw with ${computerSelection}!`
+        }
+        else if (playerSelection === "rock" && computerSelection === "scissors") {
+            return `You win ${playerSelection} beats ${computerSelection}!`
+        }
+        else if (playerSelection === "paper" && computerSelection === "rock") {
+            return `You win ${playerSelection} beats ${computerSelection}!`
+        }
+        else if (playerSelection === "scissors" && computerSelection === "paper")  {
+            return `You win ${playerSelection} beats ${computerSelection}!`
+        }
+        else {
+            return `You lose ${computerSelection} beats ${playerSelection}!`
+        }
+    }
+
+    function displayResults (result) {
+        if (round>5) {
+            round=0;
+        }
+        ++round;
+        const para = document.querySelector('p');
+        para.textContent = `Round ${round}: ${result}`;
+        
+        
+    }
+
+    function game(e) {
+        const playerSelection = e.target.getAttribute("data-choice");
+        let computerSelection, result;
+        console.log(playerSelection)
+        computerSelection = computerPlays();
+        result = playRound(playerSelection,computerSelection);
+        displayResults(result);
+    }
+
+    const choices = Array.from(document.querySelectorAll('.choice'));
+    choices.forEach(choice => choice.addEventListener('click', game));
+    let round = 0;
+</script>
+</body>
+
+</html>
